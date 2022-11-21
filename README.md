@@ -1,7 +1,8 @@
 # Vehicle Position Challenge - Rudi van Schalkwyk submission
 
 ## Design
-The design consist of a module FILTER_init() which allocates memory on the heap based on the supplied file size. FILTER_process loops the dataset for the number of records. At each iteration, each of the 10 locations is evaluated against the record to calculate and update a comparison tracking variable. The distance between the location and record sample is calculated using Pythagoras. This is the simplest mathematical method, saving valuable processor time at the expense of some accuracy.
+The design consist of a module FILTER_init() which allocates memory on the heap based on the supplied file size. FILTER_process loops the dataset for the number of records. At each iteration, each of the 10 locations is evaluated against the record to calculate and update a comparison tracking variable.
+The distance between the location and record sample is calculated using Pythagoras. This is the simplest mathematical method, saving valuable processor time at the expense of some accuracy.
 Calculating the distance in actual measurement units is omitted as the goal lies with calculating the closest vehicle and not the resulting distance. This is done to save processing time.
 
 ## Assumptions
