@@ -24,9 +24,7 @@ float distance(float x1, float x2, float y1, float y2);
 *******************************************************************************/
 void FILTER_init(filter_handle_t *filter, FILE *datafile_p, int numberOfrecords)
 {
-	int readsize = 0;
-
-    filter->vehicle_p = calloc(numberOfrecords, sizeof(vehicle_t));     // allocate space on the heap for the entire file
+    filter->vehicle_p = (vehicle_t *)calloc((unsigned int)numberOfrecords, sizeof(vehicle_t));     // allocate space on the heap for the entire file
     if(filter->vehicle_p == NULL)
     {
         fprintf(stderr, "failed to allocate memory for vehicles\n");
@@ -39,7 +37,7 @@ void FILTER_init(filter_handle_t *filter, FILE *datafile_p, int numberOfrecords)
         fprintf(stdout, "memmory allocated for input file \n");
     }
 
-    filter->location_p = calloc(10, sizeof(location_t));                // allocate space on the heap for the 10 locations
+    filter->location_p = (location_t *)calloc(10, sizeof(location_t));                // allocate space on the heap for the 10 locations
     if(filter->location_p == NULL)
     {
         fprintf(stderr, "failed to allocate memory for locations\n");
@@ -52,40 +50,38 @@ void FILTER_init(filter_handle_t *filter, FILE *datafile_p, int numberOfrecords)
         fprintf(stdout, "memmory allocated for locations \n");
     }
 
-
     fseek(datafile_p, 0, SEEK_SET);                                     // take us ot the start of the file
-  	readsize = fread(filter->vehicle_p, sizeof(vehicle_t), numberOfrecords, datafile_p);    // parse the file in chunks of vehicle_t
-    fprintf(stdout, "%d elements read \n", readsize);
+  	fread(filter->vehicle_p, sizeof(vehicle_t), (unsigned int)numberOfrecords, datafile_p);    // parse the file in chunks of vehicle_t
 
-    filter->location_p[0].position.latitude = 34.544909;                   // load the location data points into memmory
-    filter->location_p[0].position.longitude = -102.100843;
+    filter->location_p[0].position.latitude = 34.544909f;                   // load the location data points into memmory
+    filter->location_p[0].position.longitude = -102.100843f;
 
-    filter->location_p[1].position.latitude = 32.345544;
-    filter->location_p[1].position.longitude = -99.123124;
+    filter->location_p[1].position.latitude = 32.345544f;
+    filter->location_p[1].position.longitude = -99.123124f;
 
-    filter->location_p[2].position.latitude = 33.234235;
-    filter->location_p[2].position.longitude = -100.214124;
+    filter->location_p[2].position.latitude = 33.234235f;
+    filter->location_p[2].position.longitude = -100.214124f;
 
-    filter->location_p[3].position.latitude = 35.195739;
-    filter->location_p[3].position.longitude = -95.348899;
+    filter->location_p[3].position.latitude = 35.195739f;
+    filter->location_p[3].position.longitude = -95.348899f;
 
-    filter->location_p[4].position.latitude = 31.895839;
-    filter->location_p[4].position.longitude = -97.789573;
+    filter->location_p[4].position.latitude = 31.895839f;
+    filter->location_p[4].position.longitude = -97.789573f;
 
-    filter->location_p[5].position.latitude = 32.895839;
-    filter->location_p[5].position.longitude = -101.789573;
+    filter->location_p[5].position.latitude = 32.895839f;
+    filter->location_p[5].position.longitude = -101.789573f;
 
-    filter->location_p[6].position.latitude = 34.115839;
-    filter->location_p[6].position.longitude = -100.225732;
+    filter->location_p[6].position.latitude = 34.115839f;
+    filter->location_p[6].position.longitude = -100.225732f;
 
-    filter->location_p[7].position.latitude = 32.335839;
-    filter->location_p[7].position.longitude = -99.992232;
+    filter->location_p[7].position.latitude = 32.335839f;
+    filter->location_p[7].position.longitude = -99.992232f;
 
-    filter->location_p[8].position.latitude = 33.535339;
-    filter->location_p[8].position.longitude = -94.792232;
+    filter->location_p[8].position.latitude = 33.535339f;
+    filter->location_p[8].position.longitude = -94.792232f;
 
-    filter->location_p[9].position.latitude = 32.234235;
-    filter->location_p[9].position.longitude = -100.222222;
+    filter->location_p[9].position.latitude = 32.234235f;
+    filter->location_p[9].position.longitude = -100.222222f;
 
     return;
 }
@@ -191,10 +187,16 @@ void FITLER_process(filter_handle_t *filter, int numberOfrecords)
         }
     }
 
-    for(int i = 0; i < 10; i++)
-    {
-        printf("closest vehicle to location #%u is %u \n", i+1, filter->location_p[i].closest_id);  // print the results
-    }
+    fprintf(stdout, "closest vehicle to location #%u is %u \n", 1, filter->location_p[0].closest_id);  // print the results
+    fprintf(stdout, "closest vehicle to location #%u is %u \n", 2, filter->location_p[1].closest_id);  // print the results
+    fprintf(stdout, "closest vehicle to location #%u is %u \n", 3, filter->location_p[2].closest_id);  // print the results
+    fprintf(stdout, "closest vehicle to location #%u is %u \n", 4, filter->location_p[3].closest_id);  // print the results
+    fprintf(stdout, "closest vehicle to location #%u is %u \n", 5, filter->location_p[4].closest_id);  // print the results
+    fprintf(stdout, "closest vehicle to location #%u is %u \n", 6, filter->location_p[5].closest_id);  // print the results
+    fprintf(stdout, "closest vehicle to location #%u is %u \n", 7, filter->location_p[6].closest_id);  // print the results
+    fprintf(stdout, "closest vehicle to location #%u is %u \n", 8, filter->location_p[7].closest_id);  // print the results
+    fprintf(stdout, "closest vehicle to location #%u is %u \n", 9, filter->location_p[8].closest_id);  // print the results
+    fprintf(stdout, "closest vehicle to location #%u is %u \n", 10, filter->location_p[9].closest_id);  // print the results
 
     return;
 }
