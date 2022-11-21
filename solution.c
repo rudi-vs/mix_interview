@@ -11,7 +11,7 @@
 #include <time.h>
 #include "filter.h"
 
-long fileSize(char *filename);
+int fileSize(char *filename);
 
 FILE *datafile_p = NULL;
 
@@ -34,10 +34,15 @@ int main(void)
     start_t = clock();          // start the timer
 
     filesize = fileSize("positions.dat");   // how much data do we need to process ?
+    if(filesize < 0)
+    {
+        fprintf(stderr, "input file not found\n");
+        exit(EXIT_FAILURE);
+    }
 
     fprintf(stdout, "%d bytes length\n", filesize);
 
-    recordsToprocess = filesize / sizeof(vehicle_t);    // amount of records to process
+    recordsToprocess = (filesize / (int)sizeof(vehicle_t));    // amount of records to process
 
     fprintf(stdout, "position records to process %u\n", recordsToprocess);
 
@@ -67,9 +72,9 @@ int main(void)
 * Description : calculates size of a file in bytes
 * Input : char pointer / string for file name to be assessed
 * Output : none
-* Return : signed long, number of bytes
+* Return : signed int, number of bytes
 *******************************************************************************/
-long fileSize(char *filename)
+int fileSize(char *filename)
 {
     struct stat status;
 
