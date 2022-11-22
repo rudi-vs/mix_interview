@@ -10,7 +10,6 @@
 #include <math.h>
 #include <xmmintrin.h>
 #include "filter.h"
-#include <xmmintrin.h>
 
 void FILTER_init(filter_handle_t *filter, FILE *datafile_p, int numberOfrecords);
 void FITLER_process(filter_handle_t *filter, int numberOfrecords);
@@ -25,7 +24,7 @@ float distance(float x1, float x2, float y1, float y2);
 *******************************************************************************/
 void FILTER_init(filter_handle_t *filter, FILE *datafile_p, int numberOfrecords)
 {
-    filter->vehicle_p = (vehicle_t *)calloc((unsigned int)numberOfrecords, sizeof(vehicle_t));     // allocate space on the heap for the entire file
+    filter->vehicle_p = (vehicle_t *)malloc((unsigned int)numberOfrecords * sizeof(vehicle_t));     // allocate space on the heap for the entire file
     if(filter->vehicle_p == NULL)
     {
         fprintf(stderr, "failed to allocate memory for vehicles\n");
@@ -38,7 +37,7 @@ void FILTER_init(filter_handle_t *filter, FILE *datafile_p, int numberOfrecords)
         fprintf(stdout, "memmory allocated for input file \n");
     }
 
-    filter->location_p = (location_t *)calloc(10, sizeof(location_t));                // allocate space on the heap for the 10 locations
+    filter->location_p = (location_t *)malloc(10 * sizeof(location_t));                // allocate space on the heap for the 10 locations
     if(filter->location_p == NULL)
     {
         fprintf(stderr, "failed to allocate memory for locations\n");
