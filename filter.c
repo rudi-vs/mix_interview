@@ -10,6 +10,7 @@
 #include <math.h>
 #include <xmmintrin.h>
 #include "filter.h"
+#include <xmmintrin.h>
 
 void FILTER_init(filter_handle_t *filter, FILE *datafile_p, int numberOfrecords);
 void FITLER_process(filter_handle_t *filter, int numberOfrecords);
@@ -50,7 +51,7 @@ void FILTER_init(filter_handle_t *filter, FILE *datafile_p, int numberOfrecords)
         fprintf(stdout, "memmory allocated for locations \n");
     }
 
-    fseek(datafile_p, 0, SEEK_SET);                                     // take us ot the start of the file
+    //fseek(datafile_p, 0, SEEK_SET);                                     // take us ot the start of the file
   	fread(filter->vehicle_p, sizeof(vehicle_t), (unsigned int)numberOfrecords, datafile_p);    // parse the file in chunks of vehicle_t
 
     filter->location_p[0].position.latitude = 34.544909f;                   // load the location data points into memmory
@@ -96,8 +97,8 @@ void FILTER_init(filter_handle_t *filter, FILE *datafile_p, int numberOfrecords)
 *******************************************************************************/
 void FITLER_process(filter_handle_t *filter, int numberOfrecords)
 {
-    float rangeInit[10] = {0};      // used to load initial distances for smallest comparisson
-    float rangeComp[10] = {0};      // used to save distance results for smallest comparisson
+    register float rangeInit[10] = {0};      // used to load initial distances for smallest comparisson
+    register float rangeComp[10] = {0};      // used to save distance results for smallest comparisson
 
     // pre-load rangeInit with a arbitratry results based on actual data
     rangeInit[0] = distance(filter->location_p[0].position.latitude, filter->vehicle_p[0].position.latitude, filter->location_p[0].position.longitude, filter->vehicle_p[0].position.longitude);
@@ -113,7 +114,7 @@ void FITLER_process(filter_handle_t *filter, int numberOfrecords)
 
 
     // loop through the whole records dataset to calculate distance
-    for(int i = 0; i < numberOfrecords; i++ )
+    for(register unsigned int i = 0; i < numberOfrecords; i++ )
     {
         // evaluate the distance for each of the 10 locations against each data point - for() loop ommitted to save valueable executeion time
         rangeComp[0] = distance(filter->location_p[0].position.latitude, filter->vehicle_p[i].position.latitude, filter->location_p[0].position.longitude, filter->vehicle_p[i].position.longitude);
@@ -198,6 +199,7 @@ void FITLER_process(filter_handle_t *filter, int numberOfrecords)
     fprintf(stdout, "closest vehicle to location #%u is %u \n", 9, filter->location_p[8].closest_id);  // print the results
     fprintf(stdout, "closest vehicle to location #%u is %u \n", 10, filter->location_p[9].closest_id);  // print the results
 
+
     return;
 }
 
@@ -210,8 +212,8 @@ void FITLER_process(filter_handle_t *filter, int numberOfrecords)
 *******************************************************************************/
 float distance(float x1, float x2, float y1, float y2)
 {
-    float xx = 0;
-    float yy = 0;
+    register float xx = 0;
+    register float yy = 0;
 
     xx = (x2 - x1);
     yy = (y2 - y1);
