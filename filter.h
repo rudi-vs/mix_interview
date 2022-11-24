@@ -10,21 +10,22 @@
 
 typedef struct position
 {
-    float       latitude;
-    float       longitude;
+    float       lat;
+    float       lon;
 }__attribute__ ((packed)) position_t;
 
 typedef struct location
 {
-    position_t  position;
+    position_t  pos;
     uint32_t    closest_id;
+    uint32_t    no;
 }location_t;
 
 typedef struct vehicle
 {
     uint32_t    id;
-    char        registration[10];
-    position_t  position;
+    char        reg[10];
+    position_t  pos;
     uint64_t    timestamp;
 }__attribute__ ((packed)) vehicle_t;    // pack the structure for byte allignment to force 30 bytes size
 
@@ -34,7 +35,14 @@ typedef struct filter_handle
     location_t  *location_p;
 }filter_handle_t;
 
-extern void FILTER_init(filter_handle_t *filter, FILE *datafile_p, int numberOfrecords);
-extern void FITLER_process(filter_handle_t *filter, int numberOfrecords);
+typedef struct thread_param
+{
+    filter_handle_t *filter;
+    int         thread_no;
+}thread_param_t;
+
+extern void FILTER_init(filter_handle_t *filter, FILE *datafile_p);
+extern void FITLER_process(filter_handle_t *filter);
 
 #endif // FILTER_H_INCLUDED
+
