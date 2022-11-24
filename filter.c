@@ -147,6 +147,8 @@ void FITLER_process(filter_handle_t *filter)
     {
         fprintf(stdout, "closest vehicle to location #%u is %u \n", filter->location_p[i].no, filter->location_p[i].closest_id);  // print the results
     }
+	
+    free(thread);
 
     return;
 }
