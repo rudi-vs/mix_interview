@@ -121,33 +121,108 @@ void FITLER_process(filter_handle_t *filter)
         ExitProcess(EXIT_FAILURE);
     }
 
-    for(register int i = 0; i < NO_OF_THREADS ; i++)
-    {
-        thread[i].filter = filter;                      // each thread paramter set get a copy of the handler(pointers to all data memory)
-        thread[i].thread_no = i;                        // each thread is numbered 0 - 9, each thread will process on one location
-    }
+    //for(register int l = 0; l < NO_OF_THREADS ; l++)
+    //{
+        thread[0].filter = filter;                      // each thread paramter set get a copy of the handler(pointers to all data memory)
+        thread[0].thread_no = 0;                        // each thread is numbered 0 - 9, each thread will process on one location
 
-    for(register int l = 0; l < NO_OF_THREADS ; l++)
-    {
-        ThreadHandle[l] = CreateThread( NULL, 0, distance_thread, &thread[l], 0, &ThreadId[l]); // spawn a thread for each of the 10 locations
-        if (ThreadHandle[l] == NULL)
-        {
-            ExitProcess(EXIT_FAILURE);
-        }
-    }
+		thread[1].filter = filter;                      // each thread paramter set get a copy of the handler(pointers to all data memory)
+        thread[1].thread_no = 1;                        // each thread is numbered 0 - 9, each thread will process on one location
+
+		thread[2].filter = filter;                      // each thread paramter set get a copy of the handler(pointers to all data memory)
+        thread[2].thread_no = 2;                        // each thread is numbered 0 - 9, each thread will process on one location
+
+		thread[3].filter = filter;                      // each thread paramter set get a copy of the handler(pointers to all data memory)
+        thread[3].thread_no = 3;                        // each thread is numbered 0 - 9, each thread will process on one location
+
+		thread[4].filter = filter;                      // each thread paramter set get a copy of the handler(pointers to all data memory)
+        thread[4].thread_no = 4;                        // each thread is numbered 0 - 9, each thread will process on one location
+
+		thread[5].filter = filter;                      // each thread paramter set get a copy of the handler(pointers to all data memory)
+        thread[5].thread_no = 5;                        // each thread is numbered 0 - 9, each thread will process on one location
+
+		thread[6].filter = filter;                      // each thread paramter set get a copy of the handler(pointers to all data memory)
+        thread[6].thread_no = 6;                        // each thread is numbered 0 - 9, each thread will process on one location
+
+		thread[7].filter = filter;                      // each thread paramter set get a copy of the handler(pointers to all data memory)
+        thread[7].thread_no = 7;                        // each thread is numbered 0 - 9, each thread will process on one location
+
+		thread[8].filter = filter;                      // each thread paramter set get a copy of the handler(pointers to all data memory)
+        thread[8].thread_no = 8;                        // each thread is numbered 0 - 9, each thread will process on one location
+
+		thread[9].filter = filter;                      // each thread paramter set get a copy of the handler(pointers to all data memory)
+        thread[9].thread_no = 9;                        // each thread is numbered 0 - 9, each thread will process on one location
+
+        ThreadHandle[0] = CreateThread( NULL, 0, distance_thread, &thread[0], 0, &ThreadId[0]); // spawn a thread for each of the 10 locations
+		//if (ThreadHandle[0] == NULL)
+        //    ExitProcess(EXIT_FAILURE);
+		ThreadHandle[1] = CreateThread( NULL, 0, distance_thread, &thread[1], 0, &ThreadId[1]); // spawn a thread for each of the 10 locations
+		//if (ThreadHandle[1] == NULL)
+        //    ExitProcess(EXIT_FAILURE);
+		ThreadHandle[2] = CreateThread( NULL, 0, distance_thread, &thread[2], 0, &ThreadId[2]); // spawn a thread for each of the 10 locations
+		//if (ThreadHandle[2] == NULL)
+        //    ExitProcess(EXIT_FAILURE);
+		ThreadHandle[3] = CreateThread( NULL, 0, distance_thread, &thread[3], 0, &ThreadId[3]); // spawn a thread for each of the 10 locations
+		//if (ThreadHandle[3] == NULL)
+        //    ExitProcess(EXIT_FAILURE);
+		ThreadHandle[4] = CreateThread( NULL, 0, distance_thread, &thread[4], 0, &ThreadId[4]); // spawn a thread for each of the 10 locations
+		//if (ThreadHandle[4] == NULL)
+        //    ExitProcess(EXIT_FAILURE);
+		ThreadHandle[5] = CreateThread( NULL, 0, distance_thread, &thread[5], 0, &ThreadId[5]); // spawn a thread for each of the 10 locations
+		//if (ThreadHandle[5] == NULL)
+        //    ExitProcess(EXIT_FAILURE);
+		ThreadHandle[6] = CreateThread( NULL, 0, distance_thread, &thread[6], 0, &ThreadId[6]); // spawn a thread for each of the 10 locations
+		//if (ThreadHandle[6] == NULL)
+        //    ExitProcess(EXIT_FAILURE);
+		ThreadHandle[7] = CreateThread( NULL, 0, distance_thread, &thread[7], 0, &ThreadId[7]); // spawn a thread for each of the 10 locations
+		//if (ThreadHandle[7] == NULL)
+        //    ExitProcess(EXIT_FAILURE);
+		ThreadHandle[8] = CreateThread( NULL, 0, distance_thread, &thread[8], 0, &ThreadId[8]); // spawn a thread for each of the 10 locations
+		//if (ThreadHandle[8] == NULL)
+        //    ExitProcess(EXIT_FAILURE);
+		ThreadHandle[9] = CreateThread( NULL, 0, distance_thread, &thread[9], 0, &ThreadId[9]); // spawn a thread for each of the 10 locations
+        //if (ThreadHandle[9] == NULL)
+        //    ExitProcess(EXIT_FAILURE);
+    //}
 
     WaitForMultipleObjects(NO_OF_THREADS, ThreadHandle, TRUE, INFINITE);        // wait for the threads the end
 
-    for(register int i = 0; i < NO_OF_THREADS ; i++)
-    {
-        CloseHandle(ThreadHandle[i]);                    // release the win32 handle
-    }
+    //for(register int i = 0; i < NO_OF_THREADS ; i++)
+    //{
+        CloseHandle(ThreadHandle[0]);                    // release the win32 handle
+		CloseHandle(ThreadHandle[1]);                    // release the win32 handle
+		CloseHandle(ThreadHandle[2]);                    // release the win32 handle
+		CloseHandle(ThreadHandle[3]);                    // release the win32 handle
+		CloseHandle(ThreadHandle[4]);                    // release the win32 handle
+		CloseHandle(ThreadHandle[5]);                    // release the win32 handle
+		CloseHandle(ThreadHandle[6]);                    // release the win32 handle
+		CloseHandle(ThreadHandle[7]);                    // release the win32 handle
+		CloseHandle(ThreadHandle[8]);                    // release the win32 handle
+		CloseHandle(ThreadHandle[9]);                    // release the win32 handle
+        
+		fprintf(stdout, "closest vehicle to location #%u is %u \n \
+						closest vehicle to location #%u is %u \n \
+						closest vehicle to location #%u is %u \n \
+						closest vehicle to location #%u is %u \n \
+						closest vehicle to location #%u is %u \n \
+						closest vehicle to location #%u is %u \n \
+						closest vehicle to location #%u is %u \n \
+						closest vehicle to location #%u is %u \n \
+						closest vehicle to location #%u is %u \n \
+						closest vehicle to location #%u is %u \n",
+						filter->location_p[0].no, filter->location_p[0].closest_id,
+						filter->location_p[1].no, filter->location_p[1].closest_id,
+						filter->location_p[2].no, filter->location_p[2].closest_id,
+						filter->location_p[3].no, filter->location_p[3].closest_id,
+						filter->location_p[4].no, filter->location_p[4].closest_id,
+						filter->location_p[5].no, filter->location_p[5].closest_id,
+						filter->location_p[6].no, filter->location_p[6].closest_id,
+						filter->location_p[7].no, filter->location_p[7].closest_id,
+						filter->location_p[8].no, filter->location_p[8].closest_id,
+						filter->location_p[9].no, filter->location_p[9].closest_id
+						);  // print the results
+    //}
 
-    for(register int i = 0; i < NO_OF_THREADS ; i++)
-    {
-        fprintf(stdout, "closest vehicle to location #%u is %u \n", filter->location_p[i].no, filter->location_p[i].closest_id);  // print the results
-    }
-	
     free(thread);
 
     return;
@@ -190,8 +265,10 @@ DWORD WINAPI distance_thread(LPVOID arg)
 	register int id = handle->thread_no;
 
 	// pre-load rangeInit with a arbitratry results based on actual data
-    rangeInit = distance(handle->filter->location_p[id].pos.lat, handle->filter->vehicle_p[0].pos.lat, handle->filter->location_p[id].pos.lon, handle->filter->vehicle_p[0].pos.lon);
+    //rangeInit = distance(handle->filter->location_p[id].pos.lat, handle->filter->vehicle_p[0].pos.lat, handle->filter->location_p[id].pos.lon, handle->filter->vehicle_p[0].pos.lon);
 
+	rangeInit =  100;
+	
     for(register int i = 0; i < NO_OF_RECORDS; i++ )
     {
         rangeComp = distance(handle->filter->location_p[id].pos.lat, handle->filter->vehicle_p[i].pos.lat, handle->filter->location_p[id].pos.lon, handle->filter->vehicle_p[i].pos.lon);
@@ -200,7 +277,97 @@ DWORD WINAPI distance_thread(LPVOID arg)
             handle->filter->location_p[id].closest_id = handle->filter->vehicle_p[i].id;     // update the results
             rangeInit = rangeComp;
         }
-    }
+
+		i++;
+
+        rangeComp = distance(handle->filter->location_p[id].pos.lat, handle->filter->vehicle_p[i].pos.lat, handle->filter->location_p[id].pos.lon, handle->filter->vehicle_p[i].pos.lon);
+        if(rangeComp < rangeInit)     // compare results wiht previous results
+        {
+            handle->filter->location_p[id].closest_id = handle->filter->vehicle_p[i].id;     // update the results
+            rangeInit = rangeComp;
+        }    
+
+		i++;
+
+        rangeComp = distance(handle->filter->location_p[id].pos.lat, handle->filter->vehicle_p[i].pos.lat, handle->filter->location_p[id].pos.lon, handle->filter->vehicle_p[i].pos.lon);
+        if(rangeComp < rangeInit)     // compare results wiht previous results
+        {
+            handle->filter->location_p[id].closest_id = handle->filter->vehicle_p[i].id;     // update the results
+            rangeInit = rangeComp;
+        }    
+
+		i++;
+
+        rangeComp = distance(handle->filter->location_p[id].pos.lat, handle->filter->vehicle_p[i].pos.lat, handle->filter->location_p[id].pos.lon, handle->filter->vehicle_p[i].pos.lon);
+        if(rangeComp < rangeInit)     // compare results wiht previous results
+        {
+            handle->filter->location_p[id].closest_id = handle->filter->vehicle_p[i].id;     // update the results
+            rangeInit = rangeComp;
+        }    
+
+		i++;
+
+        rangeComp = distance(handle->filter->location_p[id].pos.lat, handle->filter->vehicle_p[i].pos.lat, handle->filter->location_p[id].pos.lon, handle->filter->vehicle_p[i].pos.lon);
+        if(rangeComp < rangeInit)     // compare results wiht previous results
+        {
+            handle->filter->location_p[id].closest_id = handle->filter->vehicle_p[i].id;     // update the results
+            rangeInit = rangeComp;
+        }    
+
+		i++;
+
+        rangeComp = distance(handle->filter->location_p[id].pos.lat, handle->filter->vehicle_p[i].pos.lat, handle->filter->location_p[id].pos.lon, handle->filter->vehicle_p[i].pos.lon);
+        if(rangeComp < rangeInit)     // compare results wiht previous results
+        {
+            handle->filter->location_p[id].closest_id = handle->filter->vehicle_p[i].id;     // update the results
+            rangeInit = rangeComp;
+        }    
+
+		i++;
+
+        rangeComp = distance(handle->filter->location_p[id].pos.lat, handle->filter->vehicle_p[i].pos.lat, handle->filter->location_p[id].pos.lon, handle->filter->vehicle_p[i].pos.lon);
+        if(rangeComp < rangeInit)     // compare results wiht previous results
+        {
+            handle->filter->location_p[id].closest_id = handle->filter->vehicle_p[i].id;     // update the results
+            rangeInit = rangeComp;
+        }    
+
+		i++;
+
+        rangeComp = distance(handle->filter->location_p[id].pos.lat, handle->filter->vehicle_p[i].pos.lat, handle->filter->location_p[id].pos.lon, handle->filter->vehicle_p[i].pos.lon);
+        if(rangeComp < rangeInit)     // compare results wiht previous results
+        {
+            handle->filter->location_p[id].closest_id = handle->filter->vehicle_p[i].id;     // update the results
+            rangeInit = rangeComp;
+        }    
+
+		i++;
+
+        rangeComp = distance(handle->filter->location_p[id].pos.lat, handle->filter->vehicle_p[i].pos.lat, handle->filter->location_p[id].pos.lon, handle->filter->vehicle_p[i].pos.lon);
+        if(rangeComp < rangeInit)     // compare results wiht previous results
+        {
+            handle->filter->location_p[id].closest_id = handle->filter->vehicle_p[i].id;     // update the results
+            rangeInit = rangeComp;
+        }    
+
+		i++;
+
+        rangeComp = distance(handle->filter->location_p[id].pos.lat, handle->filter->vehicle_p[i].pos.lat, handle->filter->location_p[id].pos.lon, handle->filter->vehicle_p[i].pos.lon);
+        if(rangeComp < rangeInit)     // compare results wiht previous results
+        {
+            handle->filter->location_p[id].closest_id = handle->filter->vehicle_p[i].id;     // update the results
+            rangeInit = rangeComp;
+        }    
+
+		i++;
+
+        rangeComp = distance(handle->filter->location_p[id].pos.lat, handle->filter->vehicle_p[i].pos.lat, handle->filter->location_p[id].pos.lon, handle->filter->vehicle_p[i].pos.lon);
+        if(rangeComp < rangeInit)     // compare results wiht previous results
+        {
+            handle->filter->location_p[id].closest_id = handle->filter->vehicle_p[i].id;     // update the results
+            rangeInit = rangeComp;
+        }    
+	}
 
     return 0;
 }
