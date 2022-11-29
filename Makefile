@@ -2,7 +2,7 @@ TARGET    := solution.exe
 
 LOCAL_INC := -I./
 
-FLAGS     := -m64 -march=corei7
+FLAGS     := 
 
 CFLAGS    := $(FLAGS) $(LOCAL_INC)
 
@@ -18,8 +18,8 @@ $(TARGET) : $(OBJS)
 	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
 
 clean :
-	del $(TARGET)
-	del $(OBJS)
+	del /F $(TARGET)
+	del /F *.o
 	echo clean done
 
 all : $(TARGET)
